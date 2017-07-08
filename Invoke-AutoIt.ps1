@@ -406,7 +406,7 @@ $EncodedCompressedFile = @'
 $DeflatedStream = New-Object IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String($EncodedCompressedFile),[IO.Compression.CompressionMode]::Decompress)
 $UncompressedFileBytes = New-Object Byte[](41272)
 $DeflatedStream.Read($UncompressedFileBytes, 0, 41272) | Out-Null
-[Reflection.Assembly]::Load($UncompressedFileBytes) | Out-Null
+[Reflection.Assembly]::Load($UncompressedFileBytes)
 
 # AutoItX3.PowerShell.dll
 $EncodedCompressedFile = @'
@@ -415,7 +415,7 @@ $EncodedCompressedFile = @'
 $DeflatedStream = New-Object IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String($EncodedCompressedFile),[IO.Compression.CompressionMode]::Decompress)
 $UncompressedFileBytes = New-Object Byte[](49976)
 $DeflatedStream.Read($UncompressedFileBytes, 0, 49976) | Out-Null
-$asm = [Reflection.Assembly]::Load($UncompressedFileBytes) | Out-Null
+$asm = [Reflection.Assembly]::Load($UncompressedFileBytes)
 try{
     Import-Module -Assembly $asm
 }catch {}
