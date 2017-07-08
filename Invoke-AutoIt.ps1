@@ -1,4 +1,42 @@
-﻿function Invoke-AutoIt {
+﻿function Invoke-AutoIt 
+{
+    <#
+    .SYNOPSIS
+
+    Loads the AutoIt DLL and Powershell assemblies into memory and executes the specified keystrokes.
+
+    Function: Invoke-AutoIt
+    Author: Marcello Salvati (@byt3bl33d3r)
+    License: BSD 3-Clause
+    Required Dependencies: None
+    Optional Dependencies: None
+
+    .DESCRIPTION
+
+    Invoke-AutoIt 
+
+    .PARAMETER WindowTitle
+
+    Window title to type keystokes into.
+
+    .PARAMETER Keys
+
+    Keystrokes to execute. 
+
+    .EXAMPLE
+
+    Invoke-AutoIt -WindowTitle "Remote Desktop" -Keys "Rainbow Push-ups"
+
+    Description
+    -----------
+    Types "Rainbow Push-ups" into all active windows with "Remote Desktop" in their title.
+
+    .LINK
+
+    https://www.autoitscript.com/site/
+    https://github.com/PowerShellMafia/PowerSploit/blob/master/CodeExecution/Invoke-DllInjection.ps1
+
+    #>
 
     Param (
         [Parameter( Position = 0, Mandatory = $True )]
@@ -12,6 +50,45 @@
 
 function Local:Invoke-DllInjection
 {
+    <#
+    .SYNOPSIS
+
+    Injects a Dll into the process ID of your choosing.
+
+    PowerSploit Function: Invoke-DllInjection
+    Author: Matthew Graeber (@mattifestation)
+    License: BSD 3-Clause
+    Required Dependencies: None
+    Optional Dependencies: None
+
+    .DESCRIPTION
+
+    Invoke-DllInjection injects a Dll into an arbitrary process.
+
+    .PARAMETER ProcessID
+
+    Process ID of the process you want to inject a Dll into.
+
+    .PARAMETER Dll
+
+    Name of the dll to inject. This can be an absolute or relative path.
+
+    .EXAMPLE
+
+    Invoke-DllInjection -ProcessID 4274 -Dll evil.dll
+
+    Description
+    -----------
+    Inject 'evil.dll' into process ID 4274.
+
+    .NOTES
+
+    Use the '-Verbose' option to print detailed information.
+
+    .LINK
+
+    http://www.exploit-monday.com
+    #>
 
     Param (
         [Parameter( Position = 0, Mandatory = $True )]
